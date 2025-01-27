@@ -35,6 +35,7 @@
                 <option value="both" selected>Videos and Books</option>
                 <option value="videos">Videos Only</option>
                 <option value="books">Books Only</option>
+                <option value="books">Books Only</option>
             </select>
         </div>
 
@@ -66,6 +67,27 @@
                 <p>No videos found for "{{ $keywords }}".</p>
             @endif
         </section>
+
+          <!-- Courses Section -->
+  <section id="course-section" class="mt-5">
+    <h2>Courses</h2>
+    @if(isset($courses['results']) && count($courses['results']) > 0)
+        <div class="row">
+            @foreach($courses['results'] as $course)
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $course['title'] }}</h5>
+                            <a href="{{ $course['url'] }}" target="_blank" class="btn btn-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <p>No courses found for "{{ $keywords }}".</p>
+    @endif
+</section>
 
         <!-- Books Section -->
         <section id="book-section" class="mt-5">
@@ -102,6 +124,41 @@
                 <p>No books found for "{{ $keywords }}".</p>
             @endif
         </section>
+
+        <!-- Sección de Investigaciones Académicas -->
+<section id="research-section" class="mt-5">
+    <h2>Investigaciones Académicas</h2>
+    @if(isset($researchPapers['results']) && count($researchPapers['results']) > 0)
+        <div class="row">
+            @foreach($researchPapers['results'] as $paper)
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $paper['title'] }}</h5>
+                            <p class="card-text">
+                                {{ isset($paper['authors']) ? implode(', ', array_column($paper['authors'], 'display_name')) : 'Autor desconocido' }}
+                            </p>
+                            <p class="card-text">
+                                {{ $paper['abstract'] ?? 'No hay resumen disponible.' }}
+                            </p>
+                            <a 
+                                href="{{ $paper['doi'] ? 'https://doi.org/' . $paper['doi'] : '#' }}" 
+                                target="_blank" 
+                                class="btn btn-primary">Leer Investigación</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <p>No se encontraron investigaciones académicas para "{{ $keywords }}".</p>
+    @endif
+</section>
+
+
+
+
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

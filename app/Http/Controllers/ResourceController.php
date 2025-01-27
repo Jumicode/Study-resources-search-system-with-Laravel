@@ -24,29 +24,58 @@ class ResourceController extends Controller
     public function search(Request $request)
     {
         $keywords = $request->input('keywords');
+        $videos = [];
+        $books = [];
+        $researchPapers = [];
+        $courses = [];
 
-        // Buscar videos en YouTube
+
+        // Búsqueda de videos en YouTube
         $youtubeResponse = Http::get('https://www.googleapis.com/youtube/v3/search', [
             'part' => 'snippet',
             'q' => $keywords,
             'type' => 'video',
             'maxResults' => 5,
-            'key' => $this->youtubeApiKey,
+            'key' => env('YOUTUBE_API_KEY'),
         ]);
-
         $videos = $youtubeResponse->json();
 
-        // Buscar libros en Google Books
+        // Búsqueda de libros en Google Books
         $booksResponse = Http::get('https://www.googleapis.com/books/v1/volumes', [
             'q' => $keywords,
             'maxResults' => 5,
-            'key' => $this->googleBooksApiKey,
+            'key' => env('GOOGLE_BOOKS_API_KEY'),
         ]);
-
         $books = $booksResponse->json();
 
-        // Pasar los resultados a la vista combinada
-        return view('results', compact('videos', 'books', 'keywords'));
+        // Búsqueda de investigaciones académicas en OpenAlex
+        $openAlexResponse = Http::get('https://api.openalex.org/works', [
+            'search' => $keywords,
+            'per-page' => 10,
+        ]);
+        $researchPapers = $openAlexResponse->json();
+
+        $udemyClientId = config('services.udemy.client_id');
+        $udemyClientSecret = config('services.udemy.client_secret');
+        $udemyBaseUrl = config('services.udemy.base_url');
+
+
+        $coursesResponse = Http::withBasicAuth($udemyClientId, $udemyClientSecret)
+        ->get("{$udemyBaseUrl}courses/", [
+            'search' => $keywords,
+            'page_size' => 5,
+        ]);
+    $coursesData = $coursesResponse->json();
+
+    // Construir URLs completas
+    if (isset($coursesData['results'])) {
+        foreach ($coursesData['results'] as &$course) {
+            $course['url'] = 'https://www.udemy.com' . $course['url'];
+        }
+    }
+
+    $courses = $coursesData;
+        return view('results', compact('videos', 'books', 'researchPapers', 'courses', 'keywords'));
     }
 }
 

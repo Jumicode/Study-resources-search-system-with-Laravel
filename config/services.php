@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'udemy' => [
+        'client_id' => env('UDEMY_CLIENT_ID'),
+        'client_secret' => env('UDEMY_CLIENT_SECRET'),
+        'base_url' => 'https://www.udemy.com/api-2.0/',
+    ],
+
 ];
