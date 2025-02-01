@@ -9,7 +9,19 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Search Study Resources</h1>
+
+        <form action="{{ route('auth.logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+        
         <p class="text-center">Enter a topic or keywords to find related resources.</p>
+
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
         <form action="{{ route('resources.search') }}" method="POST" class="mt-4">
             @csrf
