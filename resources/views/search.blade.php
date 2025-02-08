@@ -10,11 +10,7 @@
     <div class="container mt-5">
         <h1 class="text-center">Search Study Resources</h1>
 
-        <form action="{{ route('auth.logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
-        
+    
         <p class="text-center">Enter a topic or keywords to find related resources.</p>
 
         @if(session('success'))
