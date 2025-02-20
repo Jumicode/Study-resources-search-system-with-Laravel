@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\FavoriteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');  
     Route::get('/search', [ResourceController::class, 'searchview'])->name('resources.search');
     Route::post('/search',[ResourceController::class,'search']);
-
+    Route::post('/favorites/add', [FavoriteController::class, 'addToFavorites'])->name('favorites.add')->middleware('auth');
+    Route::get('/favorites', [FavoriteController::class, 'showFavorites'])->name('favorites.list')->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

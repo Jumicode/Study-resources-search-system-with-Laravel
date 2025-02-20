@@ -1,24 +1,13 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+@section('content')
+<div class="container mt-5">
+    <h1 class="text-center">Dashboard</h1>
+    <p class="text-center">Bienvenid@, {{ auth()->user()->name }} 👋</p>
 
-            <!-- Botón para acceder a la página de búsqueda -->
-            <div class="mt-4">
-                <a href="{{ url('/search') }}" class="inline-block px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
-                    Buscar Recursos
-                </a>
-            </div>
-        </div>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="{{ route('resources.search') }}" class="btn btn-primary">🔍 Ir a Búsqueda</a>
+        <a href="{{ route('favorites.list') }}" class="btn btn-secondary">⭐ Ver Favoritos</a>
     </div>
-</x-app-layout>
+</div>
+@endsection

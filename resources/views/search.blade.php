@@ -8,6 +8,8 @@
 </head>
 <body>
     <div class="container mt-5">
+        <a href="{{ route('dashboard') }}" class="btn btn-secondary mb-3">⬅️ Volver al Dashboard</a>
+
         <h1 class="text-center">Search Study Resources</h1>
 
     
