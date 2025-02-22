@@ -7,7 +7,9 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <!-- Ajusta la clase fill-current según tu logo -->
-                        <x-application-logo class="block h-9 w-auto fill-current text-red-500" />
+                        <div class="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+                            SearchBite
+                        </div>
                     </a>
                 </div>
 

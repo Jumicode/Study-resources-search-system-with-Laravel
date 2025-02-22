@@ -3,6 +3,14 @@
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-gray-100 py-12">
   <div class="container mx-auto px-6">
+
+      <!-- Mensaje de éxito (opcional) -->
+      @if(session('success'))
+      <div class="mb-4 p-4 rounded-md bg-green-600 text-white">
+          {{ session('success') }}
+      </div>
+  @endif
+  
     <h1 class="text-4xl font-bold text-center mb-8">Tus Favoritos</h1>
     <style>
         /* Para navegadores basados en WebKit (Chrome, Safari) */

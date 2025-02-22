@@ -8,29 +8,7 @@
                opacity-5 bg-cover bg-center">
     </div>
 
-    <!-- Header -->
-    <header class="relative w-full p-6 flex justify-between items-center backdrop-blur-sm bg-black/20">
-        <!-- Logo / Marca -->
-        <div class="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-            SearchBite
-        </div>
-
-        <!-- Opcional: Enlaces de usuario -->
-        <div class="flex items-center gap-4">
-            <span class="hidden sm:block font-medium text-gray-200">
-                {{ auth()->user()->name }}
-            </span>
-            <!-- Botón para Cerrar Sesión (si lo deseas) -->
-            <!--
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="text-gray-400 hover:text-white transition-colors">
-                    Cerrar Sesión
-                </button>
-            </form>
-            -->
-        </div>
-    </header>
+  
 
     <!-- Contenido Principal -->
     <main class="relative container mx-auto px-6 py-8">

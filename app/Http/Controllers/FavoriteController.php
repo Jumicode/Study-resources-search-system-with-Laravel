@@ -19,7 +19,7 @@ class FavoriteController extends Controller
             'cover'   => $request->input('cover'), // Puede ser nulo en caso de investigaciones
         ]);
 
-        return back()->with('success', 'Agregado a favoritos');
+        return redirect()->route('favorites.list')->with('success','Agregado a favoritos');
     }
 
     public function showFavorites()
