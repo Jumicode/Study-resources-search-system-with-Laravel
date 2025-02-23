@@ -35,7 +35,7 @@ class ResourceController extends Controller
             'part' => 'snippet',
             'q' => $keywords,
             'type' => 'video',
-            'maxResults' => 5,
+            'maxResults' => 10,
             'key' => env('YOUTUBE_API_KEY'),
         ]);
         $videos = $youtubeResponse->json();
@@ -43,7 +43,7 @@ class ResourceController extends Controller
         // Búsqueda de libros en Google Books
         $booksResponse = Http::get('https://www.googleapis.com/books/v1/volumes', [
             'q' => $keywords,
-            'maxResults' => 5,
+            'maxResults' => 10,
             'key' => env('GOOGLE_BOOKS_API_KEY'),
         ]);
         $books = $booksResponse->json();
@@ -63,7 +63,7 @@ class ResourceController extends Controller
         $coursesResponse = Http::withBasicAuth($udemyClientId, $udemyClientSecret)
         ->get("{$udemyBaseUrl}courses/", [
             'search' => $keywords,
-            'page_size' => 5,
+            'page_size' => 10,
         ]);
     $coursesData = $coursesResponse->json();
 
